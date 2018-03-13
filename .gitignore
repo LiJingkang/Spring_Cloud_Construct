@@ -25,3 +25,6 @@ hs_err_pid*
 01-Eureka/eureka-server/mvnw
 01-Eureka/eureka-server/mvnw.cmd
 01-Eureka/eureka-server/.mvn/
+01-Eureka/eureka-client/.mvn/
+01-Eureka/eureka-client/mvnw
+01-Eureka/eureka-client/mvnw.cmd
