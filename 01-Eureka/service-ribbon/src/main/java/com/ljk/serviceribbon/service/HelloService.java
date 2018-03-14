@@ -1,5 +1,7 @@
 package com.ljk.serviceribbon.service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.ribbon.proxy.annotation.Hystrix;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -10,9 +12,15 @@ public class HelloService {
     @Autowired
     RestTemplate restTemplate;
 
+    // 创建熔断器功能，指定熔断方法
+    @HystrixCommand(fallbackMethod = "hiError")
     public String hiService(String name) {
         // ribbon中它会根据服务名来选择具体的服务实例
         // 会用具体的url替换掉服务名
         return restTemplate.getForObject("http://SERVICE-HI/hi?name="+name, String.class);
+    }
+
+    public String hiError(String name) {
+        return "hi,"+name+",sorry,error!";
     }
 }
